@@ -19,7 +19,7 @@
 			then apply those to four points for a rectangle.</p>
 			<p>The manually transformed rectangle is drawn on top in blue transparent of the canvas transformed
 			rectangle in red to show they are in sync.</p>
-			<canvas id="canvas" width="1000" height="500">
+			<canvas id="canvas" width="700" height="500">
 				<h1>Sorry, this browser do not support canvas</h1>
 			</canvas>
 		</div>
@@ -37,21 +37,25 @@
 		rect = [{x: 100, y: 100}, {x: 900, y: 100}, {x: 900, y: 400}, {x: 100, y: 400}],
 		matrix = new Matrix(ctx);
 
-	//matrix.scale(1.2, 1.2);
+	// apply various transformations (context is synced by class)
+	matrix.scale(1.2, 1.2);
 	matrix.rotate(0.7);
 	matrix.translate(20, 20);
-	matrix.scale(1/1.2, 1/1.2);
-	matrix.skew(0.05, 0);
-	matrix.translate(100, -350);
+	matrix.scale(0.5, 0.5);
+	matrix.skew(0.5, 0);
+	matrix.translate(100, -220);
 	matrix.rotate(-0.3);
 
+	// apply transform to our point array
 	rect = matrix.applyToArray(rect);
 
+	// draw canvas transformed rectangle
 	ctx.strokeStyle = '#f00';
 	ctx.lineWidth = 2;
 	ctx.strokeRect(100, 100, 800, 300);
 
-	ctx.setTransform(1, 0, 0, 1, 0, 0); // reset for demo so transforms don't add up
+	// draw custom transformed rectangle
+	ctx.setTransform(1, 0, 0, 1, 0, 0); // reset for demo so transforms doesn't add up
 	ctx.strokeStyle = 'rgba(0,0,255,0.5)';
 	ctx.moveTo(rect[0].x, rect[0].y);
 	ctx.lineTo(rect[1].x, rect[1].y);
@@ -59,6 +63,17 @@
 	ctx.lineTo(rect[3].x, rect[3].y);
 	ctx.closePath();
 	ctx.stroke();
+
+	// print transformation details
+	ctx.translate(0, 250);
+	ctx.font = '14px sans-serif';
+	ctx.fillText('matrix.scale(1.2, 1.2);', 20, 40);
+	ctx.fillText('matrix.rotate(0.7);', 20, 55);
+	ctx.fillText('matrix.translate(20, 20);', 20, 70);
+	ctx.fillText('matrix.scale(0.5, 0.5);', 20, 85);
+	ctx.fillText('matrix.skew(0.5, 0);', 20, 100);
+	ctx.fillText('matrix.translate(100, -220);', 20, 115);
+	ctx.fillText('matrix.rotate(-0.3);', 20, 130);
 
 </script>
 </body>
