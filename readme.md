@@ -69,9 +69,7 @@ Check if there is any transforms applied:
 License
 -------
 
-Released under MIT license. You can use this class in both commercial and
-non-commercial projects provided that full header (minified and developer versions)
-is included.
+Released under [MIT license](http://choosealicense.com/licenses/mit/). You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.
 
 *&copy; 2014 Epistmex*
 
