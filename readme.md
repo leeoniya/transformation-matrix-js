@@ -73,6 +73,6 @@ Released under MIT license. You can use this class in both commercial and
 non-commercial projects provided that full header (minified and developer versions)
 is included.
 
-&copy; 2014 EPISTEMEX
+*&copy; 2014 Epistmex*
 
 ![Epistemex](http://i.imgur.com/uzOTLjV.png)
