@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="copyright" content="Epistemex">
+
+	<title>Tranformation Matrix demo</title>
+
+</head>
+<body>
+
+	<div id="container">
+		<header>
+			<h1>2D Transformation Matrix</h1>
+		</header>
+
+		<div id="main">
+			<p>Synchronizing a canvas context by applying various transformations,
+			then apply those to four points for a rectangle.</p>
+			<p>The manually transformed rectangle is drawn on top in blue transparent of the canvas transformed
+			rectangle in red to show they are in sync.</p>
+			<canvas id="canvas" width="1000" height="500">
+				<h1>Sorry, this browser do not support canvas</h1>
+			</canvas>
+		</div>
+
+		<footer>
+			<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJYAAAAWCAMAAAAVb5UIAAAAOVBMVEUAAACDg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4ODg4NfX1+KiopCQkKDg4M2NjZpSN/YAAAADXRSTlMAdD/FDy2VIIDsYd2sZzrnkwAAAYRJREFUSMftlGFvhCAMhlusRdRuy/7/jx1YS/WO6e6+nFnuTTQl5cWnUIGvtuCFSsIXxAp8SSyQSa6IBQEuiQWXxfpuy9LiCrtBSeU8i2mAIBvx4PFcnODSobhK7LnxLz/rOKiYQNYBzsuyqVAlZIo9Y1mNc27USRxRGFfnUlCCKh1Jh4MKATrjKhVnfbTlWLtfxKJB+gWrFunhJDaFNk7ufBNYxsWLnjeuoFSPYXnFKPEWa0ZztLAmn0o5cqwdV6iTzrGiqm/tVhIky8ItViB3Jv+kCCkWW56Mq1KdY1VBo7dAXHdYVWEtYdCvD+r1/KwOjZ7YLVdvR6oVE2aKw92y7ovl3dwtERbpcvBsy3unIYJpkqPeSkak9I3eKkj6Ole75X0k8gAWsOAko2PdUTmXtNU4xCaWtTyNB4dI5rSV/RC9P1ht64zPtn655ff1NVveAt7f8vvk/S0fNl88x4oqLamPDmUjq7iemN0V1FcnVWd0b358Qk+bdQMdYL1Sb6z/gPUDW4Y2qkc9f9AAAAAASUVORK5CYII=">
+		</footer>
+	</div> 	<!-- container -->
+
+<script src="../matrix.min.js"></script>
+<script>
+
+	var canvas = document.getElementById('canvas'),
+		ctx = canvas.getContext('2d'),
+		rect = [{x: 100, y: 100}, {x: 900, y: 100}, {x: 900, y: 400}, {x: 100, y: 400}],
+		matrix = new Matrix(ctx);
+
+	//matrix.scale(1.2, 1.2);
+	matrix.rotate(0.7);
+	matrix.translate(20, 20);
+	matrix.scale(1/1.2, 1/1.2);
+	matrix.skew(0.05, 0);
+	matrix.translate(100, -350);
+	matrix.rotate(-0.3);
+
+	rect = matrix.applyToArray(rect);
+
+	ctx.strokeStyle = '#f00';
+	ctx.lineWidth = 2;
+	ctx.strokeRect(100, 100, 800, 300);
+
+	ctx.setTransform(1, 0, 0, 1, 0, 0); // reset for demo so transforms don't add up
+	ctx.strokeStyle = 'rgba(0,0,255,0.5)';
+	ctx.moveTo(rect[0].x, rect[0].y);
+	ctx.lineTo(rect[1].x, rect[1].y);
+	ctx.lineTo(rect[2].x, rect[2].y);
+	ctx.lineTo(rect[3].x, rect[3].y);
+	ctx.closePath();
+	ctx.stroke();
+
+</script>
+</body>
+</html>
