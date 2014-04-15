@@ -73,27 +73,31 @@
 
 
     <section>
-        <article><h2>Transformation Matrix</h2><p>A transformation matrix class for JavaScript that performs various transformations
-such as rotate, scale, translate and skew.</p>
-<p>It's useful if you need to track current transforms or need to implement
-custom transforms that can't be pushed through the browser's own implementation
-such as in Canvas or CSS.</p>
-<p>The matrix is optionally able to synchronize a canvas 2D context so you can apply point
-transformation at any time and be in sync with what is on the canvas.</p>
-<p>It can be used stand-alone.</p>
+        <article><h2>2D Transformation Matrix</h2><p>A transformation matrix class for JavaScript that performs various transformations
+such as rotate, scale, translate, skew, add, subtract and multiply.</p>
+<p>It's useful if you need to track or create transforms and need to apply
+the transforms to custom points or point arrays.</p>
+<p>The matrix can optionally synchronize a 2D canvas context object so the transformations
+on the canvas matches pixel perfect the local transformations of the Matrix object.</p>
+<p>No dependencies.</p>
 <h2>Usage</h2><p>Include the script and create a new instance like:</p>
 <pre><code>var matrix = new Matrix([context]);
 </code></pre><p>You can supply an optional context as argument which in case will be
 synchronized with the transformations that are applied to the matrix
 object.</p>
 <p>You can now apply transformations:</p>
-<pre><code>matrix.rotate(angle);    // angle in radians
+<pre><code>matrix.rotate(angle);                    // angle in radians
 matrix.translate(x, y);
 matrix.scale(sx, sy);
 matrix.skew(sx, sy);
 matrix.transform(a, b, c, d, e, f);
 matrix.setTransform(a, b, c, d, e, f);
-</code></pre><p>Get current transforms:</p>
+matrix.add(a, b, c, d, e, f);
+matrix.addMatrix(matrix2);
+matrix.subtract(a, b, c, d, e, f);
+matrix.subtractMatrix(matrix2);
+matrix.reset();
+</code></pre><p>Get current transform matrix values:</p>
 <pre><code>var a = matrix.a;    // scale x
 var b = matrix.b;    // skew y
 var c = matrix.c;    // skew x
@@ -101,9 +105,10 @@ var d = matrix.d;    // scale y
 var e = matrix.e;    // translate x
 var f = matrix.f;    // translate y
 </code></pre><p>Apply to a point:</p>
-<pre><code>var tPoint = matrix.applyToPoint({x: x, y: y});
-</code></pre><p>Apply to an Array with points:</p>
+<pre><code>var tPoint = matrix.applyToPoint(x, y);
+</code></pre><p>Apply to an Array with point objects or point pair values:</p>
 <pre><code>var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
+var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
 </code></pre><p>Get inverse transformation matrix (the matrix you need to apply to get back
 to a identity matrix from whatever the matrix contains):</p>
 <pre><code>var iMatrix = matrix.getInverse();
@@ -111,11 +116,11 @@ to a identity matrix from whatever the matrix contains):</p>
 returns a new matrix you need to apply:</p>
 <pre><code>var iMatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
 </code></pre><p>Check if there is any transforms applied:</p>
-<pre><code>var status = matrix.isIdentity();  // true if identity
-</code></pre><h2>License</h2><p>Released under MIT license. You can use this class in both commercial and
-non-commercial projects provided that full header (minified and developer versions)
-is included.</p>
-<p>&copy; 2014 Epistemex</p>
+<pre><code>var status = matrix.isIdentity();              // true if identity
+</code></pre><p>Reset matrix to an identity matrix:</p>
+<pre><code>matrix.reset();
+</code></pre><h2>License</h2><p>Released under <a href="http://choosealicense.com/licenses/mit/">MIT license</a>. You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.</p>
+<p><em>&copy; 2014 Epistmex</em></p>
 <p><img src="http://i.imgur.com/uzOTLjV.png" alt="Epistemex"></p></article>
     </section>
 

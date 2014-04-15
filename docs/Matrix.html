@@ -446,6 +446,343 @@ as an argument.</p>
         <dl>
             
 <dt>
+    <h4 class="name" id="add"><span class="type-signature"></span>add<span class="signature">(a, b, c, d, e, f)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Adds the values to the current matrix.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>scale x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>skew y</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>skew x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>scale y</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>translate x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>translate y</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="addMatrix"><span class="type-signature"></span>addMatrix<span class="signature">(m)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Adds another matrix object to current matrix</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>m</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Matrix.html">Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>matrix to add to current matrix</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="applyToArray"><span class="type-signature"></span>applyToArray<span class="signature">(points)</span><span class="type-signature"> &rarr; {Array}</span></h4>
     
     
@@ -454,13 +791,14 @@ as an argument.</p>
     
     
     <div class="description">
-        <p>Apply current matrix to array with point objects. Returns a new
-array with point objects.</p>
+        <p>Apply current matrix to array with point objects or point pairs.
+Returns a new array with points in the same format as the input array.</p>
 <p>A point object is an object literal:</p>
 <pre><code>{x: x, y: y}
-</code></pre><p>so an array would contain:</p>
+</code></pre><p>so an array would contain either:</p>
 <pre><code>[{x: x1, y: y1}, {x: x2, y: y2}, ... {x: xn, y: yn}]
-</code></pre>
+</code></pre><p>or
+    [x1, y1, x2, y2, ... xn, yn]</p>
     </div>
     
 
@@ -510,7 +848,7 @@ array with point objects.</p>
 
             
 
-            <td class="description last"><p>array with point objects</p></td>
+            <td class="description last"><p>array with point objects or pairs</p></td>
         </tr>
 
 	
@@ -560,7 +898,7 @@ array with point objects.</p>
     
             
 <div class="param-desc">
-    <p>A new array with transformed point objects</p>
+    <p>A new array with transformed points</p>
 </div>
 
 
@@ -586,7 +924,7 @@ array with point objects.</p>
         
             
 <dt>
-    <h4 class="name" id="applyToPoint"><span class="type-signature"></span>applyToPoint<span class="signature">(p)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id="applyToPoint"><span class="type-signature"></span>applyToPoint<span class="signature">(x, y)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
     
 </dt>
@@ -594,10 +932,8 @@ array with point objects.</p>
     
     
     <div class="description">
-        <p>Apply current matrix to point object. Returns a new point object.</p>
-<p>A point object is an object literal:</p>
-<pre><code>{x: x, y: y}
-</code></pre>
+        <p>Apply current matrix to x and y point.
+Returns a point object.</p>
     </div>
     
 
@@ -631,13 +967,13 @@ array with point objects.</p>
 
         <tr>
             
-                <td class="name"><code>p</code></td>
+                <td class="name"><code>x</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">number</span>
 
 
             
@@ -647,7 +983,30 @@ array with point objects.</p>
 
             
 
-            <td class="description last"><p>point object</p></td>
+            <td class="description last"><p>value for x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>y</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>value for y</p></td>
         </tr>
 
 	
@@ -723,6 +1082,88 @@ array with point objects.</p>
         
             
 <dt>
+    <h4 class="name" id="getInverse"><span class="type-signature"></span>getInverse<span class="signature">()</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Get an inverse matrix of current matrix. The method returns a ne
+matrix with values you need to use to get to an identity matrix.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    <h5>Returns:</h5>
+    
+            
+
+
+<dl>
+	<dt>
+		Type
+	</dt>
+	<dd>
+		
+<span class="param-type"><a href="Matrix.html">Matrix</a></span>
+
+
+	</dd>
+</dl>
+
+
+        
+    
+    
+</dd>
+
+        
+            
+<dt>
     <h4 class="name" id="interpolate"><span class="type-signature"></span>interpolate<span class="signature">(m2, t)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
     
     
@@ -733,7 +1174,7 @@ array with point objects.</p>
     <div class="description">
         <p>Interpolate this matrix with another and produce a new matrix.
 t is a value in the range [0.0, 1.0] where 0 is this instance and
-1 is equal to the second matrix. The value is not constrained.</p>
+1 is equal to the second matrix. The t value is not constrained.</p>
     </div>
     
 
@@ -892,7 +1333,7 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     <div class="description">
-        <p>Returns true if matrix is identity matrix (no transforms).</p>
+        <p>Returns true if matrix is an identity matrix (no transforms applied).</p>
     </div>
     
 
@@ -969,7 +1410,69 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
         
             
 <dt>
-    <h4 class="name" id="rotate"><span class="type-signature"></span>rotate<span class="signature">(angle)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    <h4 class="name" id="reset"><span class="type-signature"></span>reset<span class="signature">()</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Short-hand to reset current matrix to an identity matrix.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="rotate"><span class="type-signature"></span>rotate<span class="signature">(angle)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1073,25 +1576,6 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="Matrix.html">Matrix</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
     
     
 </dd>
@@ -1099,7 +1583,7 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
         
             
 <dt>
-    <h4 class="name" id="scale"><span class="type-signature"></span>scale<span class="signature">(sx, sy)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    <h4 class="name" id="scale"><span class="type-signature"></span>scale<span class="signature">(sx, sy)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1226,25 +1710,6 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="Matrix.html">Matrix</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
     
     
 </dd>
@@ -1252,7 +1717,7 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
         
             
 <dt>
-    <h4 class="name" id="setTransform"><span class="type-signature"></span>setTransform<span class="signature">(a, b, c, d, e, f)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    <h4 class="name" id="setTransform"><span class="type-signature"></span>setTransform<span class="signature">(a, b, c, d, e, f)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1471,25 +1936,6 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="Matrix.html">Matrix</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
     
     
 </dd>
@@ -1631,7 +2077,344 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
         
             
 <dt>
-    <h4 class="name" id="transform"><span class="type-signature"></span>transform<span class="signature">(a2, b2, c2, d2, e2, f2)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    <h4 class="name" id="subtract"><span class="type-signature"></span>subtract<span class="signature">(a, b, c, d, e, f)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Subtracts the values from the current matrix.</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>a</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>scale x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>b</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>skew y</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>c</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>skew x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>d</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>scale y</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>e</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>translate x</p></td>
+        </tr>
+
+	
+
+        <tr>
+            
+                <td class="name"><code>f</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>translate y</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="subtractMatrix"><span class="type-signature"></span>subtractMatrix<span class="signature">(m)</span><span class="type-signature"></span></h4>
+    
+    
+</dt>
+<dd>
+    
+    
+    <div class="description">
+        <p>Subtracts another matrix object from current matrix</p>
+    </div>
+    
+
+    
+    
+    
+    
+    
+        <h5>Parameters:</h5>
+        
+
+<table class="params table table-striped">
+    <thead>
+	<tr>
+		
+		<th>Name</th>
+		
+
+		<th>Type</th>
+
+		
+
+		
+
+		<th class="last">Description</th>
+	</tr>
+	</thead>
+
+	<tbody>
+	
+
+        <tr>
+            
+                <td class="name"><code>m</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="Matrix.html">Matrix</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>matrix to subtract from current matrix</p></td>
+        </tr>
+
+	
+	</tbody>
+</table>
+
+    
+    
+    
+<dl class="details">
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+    
+    
+
+    
+
+    
+    
+    
+    
+    
+    
+    
+</dd>
+
+        
+            
+<dt>
+    <h4 class="name" id="transform"><span class="type-signature"></span>transform<span class="signature">(a2, b2, c2, d2, e2, f2)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -1850,25 +2633,6 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="Matrix.html">Matrix</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
     
     
 </dd>
@@ -1876,7 +2640,7 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
         
             
 <dt>
-    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(tx, ty)</span><span class="type-signature"> &rarr; {<a href="Matrix.html">Matrix</a>}</span></h4>
+    <h4 class="name" id="translate"><span class="type-signature"></span>translate<span class="signature">(tx, ty)</span><span class="type-signature"></span></h4>
     
     
 </dt>
@@ -2003,25 +2767,6 @@ t is a value in the range [0.0, 1.0] where 0 is this instance and
     
     
     
-    <h5>Returns:</h5>
-    
-            
-
-
-<dl>
-	<dt>
-		Type
-	</dt>
-	<dd>
-		
-<span class="param-type"><a href="Matrix.html">Matrix</a></span>
-
-
-	</dd>
-</dl>
-
-
-        
     
     
 </dd>

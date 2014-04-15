@@ -1,5 +1,5 @@
 /*!
- *	Transformation Matrix JS v1.0 (c) Epistemex 2014
+ *	Transformation Matrix JS v1.1 (c) Epistemex 2014
  *	www.epistemex.com
  *	License: MIT, header required.
 */
@@ -32,12 +32,55 @@ function Matrix(context) {
 	this.f = 0;
 
 	this.context = context;
+
+	// reset canvas to enable 100% sync.
+	if (context) context.setTransform(1, 0, 0, 1, 0, 0);
 }
+
+/**
+ * Adds the values to the current matrix.
+ * @param {number} a - scale x
+ * @param {number} b - skew y
+ * @param {number} c - skew x
+ * @param {number} d - scale y
+ * @param {number} e - translate x
+ * @param {number} f - translate y
+ */
+Matrix.prototype.add = function(a, b, c, d, e, f) {
+
+	this.a += a;
+	this.b += b;
+	this.c += c;
+	this.d += d;
+	this.e += e;
+	this.f += f;
+
+	if (this.context)
+		this.context.setTransform(this.a, this.b, this.c, this.d, this.e, this.f);
+};
+
+/**
+ * Adds another matrix object to current matrix
+ * @param {Matrix} m - matrix to add to current matrix
+ */
+Matrix.prototype.addMatrix = function(m) {
+	this.add(m.a, m.b, m.c, m.d, m.e, m.f);
+};
+
+/**
+ * Short-hand to reset current matrix to an identity matrix.
+ */
+Matrix.prototype.reset = function() {
+	this.a = this.d = 1;
+	this.b = this.c = this.e = this.f = 0;
+
+	if (this.context)
+		this.context.setTransform(1, 0, 0, 1, 0, 0);
+};
 
 /**
  * Rotates current matrix accumulative by angle.
  * @param {number} angle - angle in radians
- * @returns {Matrix}
  */
 Matrix.prototype.rotate = function(angle) {
 
@@ -51,7 +94,6 @@ Matrix.prototype.rotate = function(angle) {
  * Scales current matrix accumulative.
  * @param {number} sx - scale factor x (1 does nothing)
  * @param {number} sy - scale factor y (1 does nothing)
- * @returns {Matrix}
  */
 Matrix.prototype.scale = function(sx, sy) {
 	this.transform(sx, 0, 0, sy, 0, 0);
@@ -74,7 +116,6 @@ Matrix.prototype.skew = function(sx, sy) {
  * @param {number} d - scale y
  * @param {number} e - translate x
  * @param {number} f - translate y
- * @returns {Matrix}
  */
 Matrix.prototype.setTransform = function(a, b, c, d, e, f) {
 
@@ -90,10 +131,39 @@ Matrix.prototype.setTransform = function(a, b, c, d, e, f) {
 };
 
 /**
+ * Subtracts the values from the current matrix.
+ * @param {number} a - scale x
+ * @param {number} b - skew y
+ * @param {number} c - skew x
+ * @param {number} d - scale y
+ * @param {number} e - translate x
+ * @param {number} f - translate y
+ */
+Matrix.prototype.subtract = function(a, b, c, d, e, f) {
+
+	this.a -= a;
+	this.b -= b;
+	this.c -= c;
+	this.d -= d;
+	this.e -= e;
+	this.f -= f;
+
+	if (this.context)
+		this.context.setTransform(this.a, this.b, this.c, this.d, this.e, this.f);
+};
+
+/**
+ * Subtracts another matrix object from current matrix
+ * @param {Matrix} m - matrix to subtract from current matrix
+ */
+Matrix.prototype.subtractMatrix = function(m) {
+	this.subtract(m.a, m.b, m.c, m.d, m.e, m.f);
+};
+
+/**
  * Translate current matrix accumulative.
  * @param {number} tx - translation for x
  * @param {number} ty - translation for y
- * @returns {Matrix}
  */
 Matrix.prototype.translate = function(tx, ty) {
 	this.transform(1, 0, 0, 1, tx, ty);
@@ -107,7 +177,6 @@ Matrix.prototype.translate = function(tx, ty) {
  * @param {number} d2 - scale y
  * @param {number} e2 - translate x
  * @param {number} f2 - translate y
- * @returns {Matrix}
  */
 Matrix.prototype.transform = function(a2, b2, c2, d2, e2, f2) {
 
@@ -134,6 +203,11 @@ Matrix.prototype.transform = function(a2, b2, c2, d2, e2, f2) {
 		this.context.setTransform(this.a, this.b, this.c, this.d, this.e, this.f);
 };
 
+/**
+ * Get an inverse matrix of current matrix. The method returns a ne
+ * matrix with values you need to use to get to an identity matrix.
+ * @returns {Matrix}
+ */
 Matrix.prototype.getInverse = function() {
 
 	var	a = this.a,
@@ -160,7 +234,7 @@ Matrix.prototype.getInverse = function() {
 /**
  * Interpolate this matrix with another and produce a new matrix.
  * t is a value in the range [0.0, 1.0] where 0 is this instance and
- * 1 is equal to the second matrix. The value is not constrained.
+ * 1 is equal to the second matrix. The t value is not constrained.
  *
  * @param {Matrix} m2 - the matrix to interpolate with.
  * @param {number} t - interpolation [0.0, 1.0]
@@ -183,60 +257,72 @@ Matrix.prototype.interpolate = function(m2, t) {
 };
 
 /**
- * Apply current matrix to point object. Returns a new point object.
+ * Apply current matrix to x and y point.
+ * Returns a point object.
  *
- * A point object is an object literal:
- *
- *     {x: x, y: y}
- *
- * @param {{x: number, y: number}} p - point object
+ * @param {number} x - value for x
+ * @param {number} y - value for y
  * @returns {{x: number, y: number}} A new transformed point object
  */
-Matrix.prototype.applyToPoint = function(p) {
+Matrix.prototype.applyToPoint = function(x, y) {
 
-	var x, y;
+	var nx, ny;
 
-	x = p.x * this.a + p.y * this.c + this.e;
-	y = p.x * this.b + p.y * this.d + this.f;
+	nx = x * this.a + y * this.c + this.e;
+	ny = x * this.b + y * this.d + this.f;
 
-	return {x: x, y: y};
+	return {x: nx, y: ny};
 };
 
 /**
- * Apply current matrix to array with point objects. Returns a new
- * array with point objects.
+ * Apply current matrix to array with point objects or point pairs.
+ * Returns a new array with points in the same format as the input array.
  *
  * A point object is an object literal:
  *
  *     {x: x, y: y}
  *
- * so an array would contain:
+ * so an array would contain either:
  *
  *     [{x: x1, y: y1}, {x: x2, y: y2}, ... {x: xn, y: yn}]
  *
- * @param {Array} points - array with point objects
- * @returns {Array} A new array with transformed point objects
+ * or
+ *     [x1, y1, x2, y2, ... xn, yn]
+ *
+ * @param {Array} points - array with point objects or pairs
+ * @returns {Array} A new array with transformed points
  */
 Matrix.prototype.applyToArray = function(points) {
 
-	var i = 0, p, mxPoints = [];
+	var i = 0, p, mxPoints = [], x, y;
 
-	for(; p = points[i++];) {
+	if (typeof points[0] === 'number') {
+		for(; p = points[i]; i += 2) {
 
-		var x = p.x * this.a + p.y * this.c + this.e,
+			x = p[i] * this.a + p[i+1] * this.c + this.e;
+			y = p[i] * this.b + p[i+1] * this.d + this.f;
+
+			mxPoints.push(x, y);
+		}
+	}
+	else{
+		for(; p = points[i++];) {
+
+			x = p.x * this.a + p.y * this.c + this.e;
 			y = p.x * this.b + p.y * this.d + this.f;
 
-		mxPoints.push({x: x, y: y});
+			mxPoints.push({x: x, y: y});
+		}
 	}
 
 	return mxPoints;
 };
 
 /**
- * Returns true if matrix is identity matrix (no transforms).
+ * Returns true if matrix is an identity matrix (no transforms applied).
  * @returns {boolean} True if identity (not transformed)
  */
 Matrix.prototype.isIdentity = function() {
 	return (this.a === 1 && this.b === 0 && this.c === 0 &&
-		this.d === 1 && this.e === 0 && this.f === 0);
+			this.d === 1 && this.e === 0 && this.f === 0);
 };

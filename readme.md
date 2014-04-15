@@ -1,18 +1,16 @@
-Transformation Matrix
----------------------
+2D Transformation Matrix
+------------------------
 
 A transformation matrix class for JavaScript that performs various transformations
-such as rotate, scale, translate and skew.
+such as rotate, scale, translate, skew, add, subtract and multiply.
 
-It's useful if you need to track current transforms or need to implement
-custom transforms that can't be pushed through the browser's own implementation
-such as in Canvas or CSS. With the class you can apply the transform to your
-own point or point arrays.
+It's useful if you need to track or create transforms and need to apply
+the transforms to custom points or point arrays.
 
-The matrix is optionally able to synchronize a canvas 2D context (but not dependent on)
-so you can apply point transformation at any time and be in sync with what is on the canvas.
+The matrix can optionally synchronize a 2D canvas context object so the transformations
+on the canvas matches pixel perfect the local transformations of the Matrix object.
 
-It can be used completely as stand-alone. No dependencies.
+No dependencies.
 
 Usage
 -----
@@ -27,14 +25,19 @@ object.
 
 You can now apply transformations:
 
-    matrix.rotate(angle);    // angle in radians
+    matrix.rotate(angle);    		        // angle in radians
     matrix.translate(x, y);
     matrix.scale(sx, sy);
     matrix.skew(sx, sy);
     matrix.transform(a, b, c, d, e, f);
     matrix.setTransform(a, b, c, d, e, f);
+	matrix.add(a, b, c, d, e, f);
+	matrix.addMatrix(matrix2);
+	matrix.subtract(a, b, c, d, e, f);
+	matrix.subtractMatrix(matrix2);
+	matrix.reset();
 
-Get current transforms:
+Get current transform matrix values:
 
     var a = matrix.a;	// scale x
     var b = matrix.b;	// skew y
@@ -45,11 +48,12 @@ Get current transforms:
 
 Apply to a point:
 
-    var tPoint = matrix.applyToPoint({x: x, y: y});
+    var tPoint = matrix.applyToPoint(x, y);
 
-Apply to an Array with points:
+Apply to an Array with point objects or point pair values:
 
     var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
+    var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
 
 Get inverse transformation matrix (the matrix you need to apply to get back
 to a identity matrix from whatever the matrix contains):
@@ -63,7 +67,11 @@ returns a new matrix you need to apply:
 
 Check if there is any transforms applied:
 
-    var status = matrix.isIdentity();  // true if identity
+    var status = matrix.isIdentity();              // true if identity
+
+Reset matrix to an identity matrix:
+
+    matrix.reset();
 
 
 License

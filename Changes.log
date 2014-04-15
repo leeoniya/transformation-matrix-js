@@ -1,0 +1,18 @@
+Change log for 2D Transformation Matrix
+---------------------------------------
+
+1.1
+
+ADD: New method add()
+ADD: New method addMatrix()
+ADD: New method subtract()
+ADD: New method subtractMatrix()
+ADD: New method reset()
+CHG: NOTE: Method applyToPoint() takes pair of x/y instead of point object
+CHG: Method applyToArray() can now take two forms of arrays (point objects and point pair values)
+FIX: If context is provided it will now be initialized to identity matrix to enable 100% sync
+FIX: Some documentation errors
+
+1.0
+
+Initial release
