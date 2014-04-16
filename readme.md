@@ -1,13 +1,13 @@
-2D Transformation Matrix
-------------------------
+2D Affine Transformation Matrix
+-------------------------------
 
-A transformation matrix class for JavaScript that performs various transformations
+A affine transformation matrix class for JavaScript that performs various transformations
 such as rotate, scale, translate, skew, add, subtract and multiply.
 
-It's useful if you need to track or create transforms and need to apply
+It's very useful if you need to track or create transforms and need to apply
 the transforms to custom points or point arrays.
 
-The matrix can optionally synchronize a 2D canvas context object so the transformations
+The matrix can optionally synchronize a canvas 2D context object so the transformations
 on the canvas matches pixel perfect the local transformations of the Matrix object.
 
 No dependencies.
@@ -75,6 +75,8 @@ Check if there is any transforms applied:
 Reset matrix to an identity matrix:
 
     matrix.reset();
+
+See documentation for full overview and usage.
 
 
 License
