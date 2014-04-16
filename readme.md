@@ -1,8 +1,9 @@
 2D Affine Transformation Matrix
 -------------------------------
 
-A affine transformation matrix class for JavaScript that performs various transformations
-such as rotate, scale, translate, skew, add, subtract and multiply.
+A affine transformation matrix (3x3) class for JavaScript that performs
+various transformations such as rotate, scale, translate, skew, add, subtract
+and multiply.
 
 It's very useful if you need to track or create transforms and need to apply
 the transforms to custom points or point arrays.
@@ -58,19 +59,27 @@ Apply to an Array with point objects or point pair values:
     var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
     var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
 
+or apply to a canvas context (other than optionally referenced in constructor):
+
+    matrix.applyToContext(myContext);
+
 Get inverse transformation matrix (the matrix you need to apply to get back
 to a identity matrix from whatever the matrix contains):
 
-    var iMatrix = matrix.getInverse();
+    var invmatrix = matrix.getInverse();
 
-You can also interpolate between current and a new matrix. The function
-returns a new matrix you need to apply:
+You can interpolate between current and a new matrix. The function
+returns a new matrix:
 
-    var iMatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
+    var imatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
 
 Check if there is any transforms applied:
 
     var status = matrix.isIdentity();              // true if identity
+
+Check if two matrices are identical:
+
+    var status = matrix.isEqual(matrix2);          // true if equal
 
 Reset matrix to an identity matrix:
 

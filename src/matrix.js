@@ -1,5 +1,5 @@
 /*!
- *	Transformation Matrix JS v1.2 (c) Epistemex 2014
+ *	Transformation Matrix JS v1.3 (c) Epistemex 2014
  *	www.epistemex.com
  *	License: MIT, header required.
 */
@@ -323,6 +323,16 @@ Matrix.prototype.applyToArray = function(points) {
 	}
 
 	return mxPoints;
+};
+
+/**
+ * Apply to any canvas 2D context object. This does not affect the
+ * context that optionally was referenced in constructor unless it is
+ * the same context.
+ * @param {CanvasRenderingContext2D} context
+ */
+Matrix.prototype.applyToContext = function(context) {
+	context.setTransform(this.a, this.b, this.c, this.d, this.e, this.f);
 };
 
 /**

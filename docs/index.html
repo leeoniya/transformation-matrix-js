@@ -73,8 +73,9 @@
 
 
     <section>
-        <article><h2>2D Affine Transformation Matrix</h2><p>A affine transformation matrix class for JavaScript that performs various transformations
-such as rotate, scale, translate, skew, add, subtract and multiply.</p>
+        <article><h2>2D Affine Transformation Matrix</h2><p>A affine transformation matrix (3x3) class for JavaScript that performs
+various transformations such as rotate, scale, translate, skew, add, subtract
+and multiply.</p>
 <p>It's very useful if you need to track or create transforms and need to apply
 the transforms to custom points or point arrays.</p>
 <p>The matrix can optionally synchronize a canvas 2D context object so the transformations
@@ -112,14 +113,18 @@ var f = matrix.f;    // translate y
 </code></pre><p>Apply to an Array with point objects or point pair values:</p>
 <pre><code>var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
 var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
+</code></pre><p>or apply to a canvas context (other than optionally referenced in constructor):</p>
+<pre><code>matrix.applyToContext(myContext);
 </code></pre><p>Get inverse transformation matrix (the matrix you need to apply to get back
 to a identity matrix from whatever the matrix contains):</p>
-<pre><code>var iMatrix = matrix.getInverse();
-</code></pre><p>You can also interpolate between current and a new matrix. The function
-returns a new matrix you need to apply:</p>
-<pre><code>var iMatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
+<pre><code>var invmatrix = matrix.getInverse();
+</code></pre><p>You can interpolate between current and a new matrix. The function
+returns a new matrix:</p>
+<pre><code>var imatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
 </code></pre><p>Check if there is any transforms applied:</p>
 <pre><code>var status = matrix.isIdentity();              // true if identity
+</code></pre><p>Check if two matrices are identical:</p>
+<pre><code>var status = matrix.isEqual(matrix2);          // true if equal
 </code></pre><p>Reset matrix to an identity matrix:</p>
 <pre><code>matrix.reset();
 </code></pre><p>See documentation for full overview and usage.</p>

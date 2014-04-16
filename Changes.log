@@ -1,6 +1,10 @@
 Change log for 2D Transformation Matrix
 ---------------------------------------
 
+1.3
+
+ADD: New method applyToContext().
+
 1.2
 
 ADD: Two new helper methods flipX() and flipY()
