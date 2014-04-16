@@ -26,15 +26,18 @@ object.
 You can now apply transformations:
 
     matrix.rotate(angle);    		        // angle in radians
+    matrix.rotateDeg(angle);   		        // angle in degrees
     matrix.translate(x, y);
+    matrix.translateX(x);
+    matrix.translateY(y);
     matrix.scale(sx, sy);
+    matrix.scaleX(sx);
+    matrix.scaleY(sy);
     matrix.skew(sx, sy);
+    matrix.skewX(sx);
+    matrix.skewY(sy);
     matrix.transform(a, b, c, d, e, f);
     matrix.setTransform(a, b, c, d, e, f);
-	matrix.add(a, b, c, d, e, f);
-	matrix.addMatrix(matrix2);
-	matrix.subtract(a, b, c, d, e, f);
-	matrix.subtractMatrix(matrix2);
 	matrix.reset();
 
 Get current transform matrix values:

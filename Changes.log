@@ -1,13 +1,25 @@
 Change log for 2D Transformation Matrix
 ---------------------------------------
 
+1.2
+
+ADD: Two new helper methods flipX() and flipY()
+ADD: Two new helper methods skewX() and skewY()
+ADD: Two new helper methods scaleX() and scaleY()
+ADD: Two new helper methods translateX() and translateY()
+ADD: Helper method rotateDeg() to rotate by degrees
+ADD: New method isEqual() to compare current matrix with another matrix
+CHG: getInverse() and interpolate() no longer apply parent's context to returned matrix
+CHG: Epsilon tolerance for floating point equal checks
+REM: Previous (partly experimental) added methods for add/subtract removed due to non-linear nature.
+
 1.1
 
-ADD: New method add()
-ADD: New method addMatrix()
-ADD: New method subtract()
-ADD: New method subtractMatrix()
 ADD: New method reset()
+ADD: New method add() (obsoleted)
+ADD: New method addMatrix() (obsoleted)
+ADD: New method subtract() (obsoleted)
+ADD: New method subtractMatrix() (obsoleted)
 CHG: NOTE: Method applyToPoint() takes pair of x/y instead of point object
 CHG: Method applyToArray() can now take two forms of arrays (point objects and point pair values)
 FIX: If context is provided it will now be initialized to identity matrix to enable 100% sync
