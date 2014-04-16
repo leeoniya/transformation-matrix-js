@@ -73,11 +73,11 @@
 
 
     <section>
-        <article><h2>2D Transformation Matrix</h2><p>A transformation matrix class for JavaScript that performs various transformations
+        <article><h2>2D Affine Transformation Matrix</h2><p>A affine transformation matrix class for JavaScript that performs various transformations
 such as rotate, scale, translate, skew, add, subtract and multiply.</p>
-<p>It's useful if you need to track or create transforms and need to apply
+<p>It's very useful if you need to track or create transforms and need to apply
 the transforms to custom points or point arrays.</p>
-<p>The matrix can optionally synchronize a 2D canvas context object so the transformations
+<p>The matrix can optionally synchronize a canvas 2D context object so the transformations
 on the canvas matches pixel perfect the local transformations of the Matrix object.</p>
 <p>No dependencies.</p>
 <h2>Usage</h2><p>Include the script and create a new instance like:</p>
@@ -87,15 +87,18 @@ synchronized with the transformations that are applied to the matrix
 object.</p>
 <p>You can now apply transformations:</p>
 <pre><code>matrix.rotate(angle);                    // angle in radians
+matrix.rotateDeg(angle);                   // angle in degrees
 matrix.translate(x, y);
+matrix.translateX(x);
+matrix.translateY(y);
 matrix.scale(sx, sy);
+matrix.scaleX(sx);
+matrix.scaleY(sy);
 matrix.skew(sx, sy);
+matrix.skewX(sx);
+matrix.skewY(sy);
 matrix.transform(a, b, c, d, e, f);
 matrix.setTransform(a, b, c, d, e, f);
-matrix.add(a, b, c, d, e, f);
-matrix.addMatrix(matrix2);
-matrix.subtract(a, b, c, d, e, f);
-matrix.subtractMatrix(matrix2);
 matrix.reset();
 </code></pre><p>Get current transform matrix values:</p>
 <pre><code>var a = matrix.a;    // scale x
@@ -119,7 +122,8 @@ returns a new matrix you need to apply:</p>
 <pre><code>var status = matrix.isIdentity();              // true if identity
 </code></pre><p>Reset matrix to an identity matrix:</p>
 <pre><code>matrix.reset();
-</code></pre><h2>License</h2><p>Released under <a href="http://choosealicense.com/licenses/mit/">MIT license</a>. You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.</p>
+</code></pre><p>See documentation for full overview and usage.</p>
+<h2>License</h2><p>Released under <a href="http://choosealicense.com/licenses/mit/">MIT license</a>. You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.</p>
 <p><em>&copy; 2014 Epistmex</em></p>
 <p><img src="http://i.imgur.com/uzOTLjV.png" alt="Epistemex"></p></article>
     </section>
