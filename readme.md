@@ -85,6 +85,10 @@ Reset matrix to an identity matrix:
 
     matrix.reset();
 
+Methods are also chainable:
+
+    matrix.rotateDeg(45).translate(100, 120);     // rotate, then translate
+
 See documentation for full overview and usage.
 
 

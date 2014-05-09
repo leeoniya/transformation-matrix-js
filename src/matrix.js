@@ -1,14 +1,15 @@
 /*!
- *	Transformation Matrix JS v1.3 (c) Epistemex 2014
+ *	Transformation Matrix JS v1.4 (c) Epistemex 2014
  *	www.epistemex.com
- *	License: MIT, header required.
+ *	License: MIT, this header required.
 */
 
 /**
  * 2D transformation matrix object initialized with identity matrix.
  *
  * The matrix can synchronize a canvas context by supplying the context
- * as an argument.
+ * as an argument, or later apply current absolute transform to an
+ * existing context.
  *
  * All values are handled as floating point values.
  *
@@ -42,6 +43,7 @@ function Matrix(context) {
  */
 Matrix.prototype.flipX = function() {
 	this.transform(-1, 0, 0, 1, 0, 0);
+	return this;
 };
 
 /**
@@ -49,6 +51,7 @@ Matrix.prototype.flipX = function() {
  */
 Matrix.prototype.flipY = function() {
 	this.transform(1, 0, 0, -1, 0, 0);
+	return this;
 };
 
 /**
@@ -60,6 +63,8 @@ Matrix.prototype.reset = function() {
 	this.b = this.c = this.e = this.f = 0;
 
 	this._setCtx();
+
+	return this;
 };
 
 /**
@@ -72,6 +77,8 @@ Matrix.prototype.rotate = function(angle) {
 		sin = Math.sin(angle);
 
 	this.transform(cos, sin, -sin, cos, 0, 0);
+
+	return this;
 };
 
 /**
@@ -80,6 +87,7 @@ Matrix.prototype.rotate = function(angle) {
  */
 Matrix.prototype.rotateDeg = function(angle) {
 	this.rotate(angle * Math.PI / 180);
+	return this;
 };
 
 /**
@@ -89,6 +97,7 @@ Matrix.prototype.rotateDeg = function(angle) {
  */
 Matrix.prototype.scale = function(sx, sy) {
 	this.transform(sx, 0, 0, sy, 0, 0);
+	return this;
 };
 
 /**
@@ -97,6 +106,7 @@ Matrix.prototype.scale = function(sx, sy) {
  */
 Matrix.prototype.scaleX = function(sx) {
 	this.transform(sx, 0, 0, 1, 0, 0);
+	return this;
 };
 
 /**
@@ -105,6 +115,7 @@ Matrix.prototype.scaleX = function(sx) {
  */
 Matrix.prototype.scaleY = function(sy) {
 	this.transform(1, 0, 0, sy, 0, 0);
+	return this;
 };
 
 /**
@@ -114,6 +125,7 @@ Matrix.prototype.scaleY = function(sy) {
  */
 Matrix.prototype.skew = function(sx, sy) {
 	this.transform(1, sy, sx, 1, 0, 0);
+	return this;
 };
 
 /**
@@ -122,6 +134,7 @@ Matrix.prototype.skew = function(sx, sy) {
  */
 Matrix.prototype.skewX = function(s) {
 	this.transform(1, 0, s, 1, 0, 0);
+	return this;
 };
 
 /**
@@ -130,6 +143,7 @@ Matrix.prototype.skewX = function(s) {
  */
 Matrix.prototype.skewY = function(s) {
 	this.transform(1, s, 0, 1, 0, 0);
+	return this;
 };
 
 /**
@@ -151,6 +165,8 @@ Matrix.prototype.setTransform = function(a, b, c, d, e, f) {
 	this.f = f;
 
 	this._setCtx();
+
+	return this;
 };
 
 /**
@@ -160,6 +176,7 @@ Matrix.prototype.setTransform = function(a, b, c, d, e, f) {
  */
 Matrix.prototype.translate = function(tx, ty) {
 	this.transform(1, 0, 0, 1, tx, ty);
+	return this;
 };
 
 /**
@@ -168,6 +185,7 @@ Matrix.prototype.translate = function(tx, ty) {
  */
 Matrix.prototype.translateX = function(tx) {
 	this.transform(1, 0, 0, 1, tx, 0);
+	return this;
 };
 
 /**
@@ -176,6 +194,7 @@ Matrix.prototype.translateX = function(tx) {
  */
 Matrix.prototype.translateY = function(ty) {
 	this.transform(1, 0, 0, 1, 0, ty);
+	return this;
 };
 
 /**
@@ -209,6 +228,8 @@ Matrix.prototype.transform = function(a2, b2, c2, d2, e2, f2) {
 	this.f = b1 * e2 + d1 * f2 + f1;
 
 	this._setCtx();
+
+	return this;
 };
 
 /**
@@ -333,6 +354,7 @@ Matrix.prototype.applyToArray = function(points) {
  */
 Matrix.prototype.applyToContext = function(context) {
 	context.setTransform(this.a, this.b, this.c, this.d, this.e, this.f);
+	return this;
 };
 
 /**
