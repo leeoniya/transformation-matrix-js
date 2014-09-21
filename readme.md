@@ -99,4 +99,4 @@ Released under [MIT license](http://choosealicense.com/licenses/mit/). You can u
 
 *&copy; 2014 Epistmex*
 
-![Epistemex](http://i.imgur.com/NJpHOFr.png)
+![Epistemex](http://i.imgur.com/YxO8CtB.png)
