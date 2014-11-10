@@ -322,24 +322,18 @@ Matrix.prototype.applyToPoint = function(x, y) {
  */
 Matrix.prototype.applyToArray = function(points) {
 
-	var i = 0, p, mxPoints = [], x, y;
+	var i = 0, p, mxPoints = [];
 
 	if (typeof points[0] === 'number') {
-		for(; p = points[i]; i += 2) {
-
-			x = p[i] * this.a + p[i+1] * this.c + this.e;
-			y = p[i] * this.b + p[i+1] * this.d + this.f;
-
-			mxPoints.push(x, y);
+		while (i < points.length) {
+			p = this.applyToPoint(points[i++], points[i++]);
+			mxPoints.push(p.x, p.y);
 		}
 	}
 	else {
-		for(; p = points[i++];) {
-
-			x = p.x * this.a + p.y * this.c + this.e;
-			y = p.x * this.b + p.y * this.d + this.f;
-
-			mxPoints.push({x: x, y: y});
+		while (i < points.length) {
+			p = this.applyToPoint(points[i].x, points[i++].y);
+			mxPoints.push(p);
 		}
 	}
 
