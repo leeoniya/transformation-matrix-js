@@ -15,8 +15,8 @@
  *
  * @param {CanvasRenderingContext2D} [context] - Optional context to sync with Matrix
  * @prop {number} a - scale x
- * @prop {number} b - skew y
- * @prop {number} c - skew x
+ * @prop {number} b - shear y
+ * @prop {number} c - shear x
  * @prop {number} d - scale y
  * @prop {number} e - translate x
  * @prop {number} f - translate y
@@ -114,38 +114,63 @@ Matrix.prototype = {
 	},
 
 	/**
-	 * Apply skew to the current matrix accumulative.
-	 * @param {number} sx - amount of skew for x
-	 * @param {number} sy - amount of skew for y
+	 * Apply shear to the current matrix accumulative.
+	 * @param {number} sx - amount of shear for x
+	 * @param {number} sy - amount of shear for y
 	 */
-	skew: function(sx, sy) {
+	shear: function(sx, sy) {
 		this.transform(1, sy, sx, 1, 0, 0);
 		return this;
 	},
 
 	/**
-	 * Apply skew for x to the current matrix accumulative.
-	 * @param {number} sx - amount of skew for x
+	 * Apply shear for x to the current matrix accumulative.
+	 * @param {number} sx - amount of shear for x
 	 */
-	skewX: function(sx) {
+	shearX: function(sx) {
 		this.transform(1, 0, sx, 1, 0, 0);
 		return this;
 	},
 
 	/**
-	 * Apply skew for y to the current matrix accumulative.
-	 * @param {number} sy - amount of skew for y
+	 * Apply shear for y to the current matrix accumulative.
+	 * @param {number} sy - amount of shear for y
 	 */
-	skewY: function(sy) {
+	shearY: function(sy) {
 		this.transform(1, sy, 0, 1, 0, 0);
 		return this;
 	},
 
 	/**
+	 * Apply skew to the current matrix accumulative.
+	 * @param {number} ax - angle of skew for x
+	 * @param {number} ay - angle of skew for y
+	 */
+	skew: function(ax, ay) {
+		return this.shear(Math.tan(ax), Math.tan(ay));
+	},
+
+	/**
+	 * Apply skew for x to the current matrix accumulative.
+	 * @param {number} ax - angle of skew for x
+	 */
+	skewX: function(ax) {
+		return this.shearX(Math.tan(ax));
+	},
+
+	/**
+	 * Apply skew for y to the current matrix accumulative.
+	 * @param {number} ay - angle of skew for y
+	 */
+	skewY: function(ay) {
+		return this.shearY(Math.tan(ay));
+	},
+
+	/**
 	 * Set current matrix to new absolute matrix.
 	 * @param {number} a - scale x
-	 * @param {number} b - skew y
-	 * @param {number} c - skew x
+	 * @param {number} b - shear y
+	 * @param {number} c - shear x
 	 * @param {number} d - scale y
 	 * @param {number} e - translate x
 	 * @param {number} f - translate y
@@ -193,8 +218,8 @@ Matrix.prototype = {
 	/**
 	 * Multiplies current matrix with new matrix values.
 	 * @param {number} a2 - scale x
-	 * @param {number} b2 - skew y
-	 * @param {number} c2 - skew x
+	 * @param {number} b2 - shear y
+	 * @param {number} c2 - shear x
 	 * @param {number} d2 - scale y
 	 * @param {number} e2 - translate x
 	 * @param {number} f2 - translate y
