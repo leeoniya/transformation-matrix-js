@@ -278,6 +278,69 @@ Matrix.prototype = {
 	},
 
 	/**
+	 * Decompose the current matrix into simple transforms using either
+	 * QR (default) or LU decomposition. Code adapted from
+	 * http://www.maths-informatique-jeux.com/blog/frederic/?post/2013/12/01/Decomposition-of-2D-transform-matrices
+	 * The result must be applied in the following order to reproduce the current matrix:
+	 * if QR: translate->rotate->scale->skewX
+	 * if LU: translate->skewY->scale->skewX
+	 * @param {boolean} useLU - use LU rather than QR algorithm
+	 * @returns {Matrix}
+	 */
+	decompose: function(useLU) {
+		var a = this.a,
+			b = this.b,
+			c = this.c,
+			d = this.d;
+
+		var tx = {
+			translate:	{x: this.e, y: this.f},
+			rotate:		0,
+			rotateDeg:	0,
+			scale:		{x: 1, y: 1},
+			skew:		{x: 0, y: 0}
+		};
+
+		var delta = a * d - b * c;
+
+		if (!useLU) {
+			// Apply the QR-like decomposition.
+			if (a != 0 || b != 0) {
+				var r			= Math.sqrt(a*a+b*b);
+				tx.rotate		= b > 0 ? Math.acos(a/r) : -Math.acos(a/r);
+				tx.scale		= {x: r, y: delta/r};
+				tx.skew			= {x: Math.atan((a*c+b*d)/(r*r)), y: 0};
+			} else if (c != 0 || d != 0) {
+				var s			= Math.sqrt(c*c+d*d);
+				tx.rotate		= Math.PI/2 - (d > 0 ? Math.acos(-c/s) : -Math.acos(c/s));
+				tx.scale		= {x: delta/s, y: s};
+				tx.skew			= {x: 0, y: Math.atan((a*c+b*d)/(s*s))};
+			} else { // a = b = c = d = 0
+				tx.scale		= {x: 0, y: 0};
+			}
+
+			tx.rotateDeg		= tx.rotate * 180/Math.PI;
+		} else {
+			// Apply the LU-like decomposition.
+			if (a != 0) {
+				tx.skew.y		= Math.atan(b/a);
+				tx.scale		= {x: a, y: delta/a};
+				tx.skew.x		= Math.atan(c/a);
+			} else if (b != 0) {
+				tx.rotate		= Math.PI/2;
+				tx.scale		= {x: b, y: delta/b};
+				tx.skew.x		= Math.atan(d/b);
+			} else { // a = b = 0
+				tx.scale		= {x: c, y: d};
+				tx.skew.x		= Math.PI/4;
+			//	.scale(0, 1);
+			}
+		}
+
+		return tx;
+	},
+
+	/**
 	 * Interpolate this matrix with another and produce a new matrix.
 	 * t is a value in the range [0.0, 1.0] where 0 is this instance and
 	 * 1 is equal to the second matrix. The t value is not constrained.
