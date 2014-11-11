@@ -76,18 +76,17 @@
         <article><h2>2D Affine Transformation Matrix</h2><p>A affine transformation matrix (3x3) class for JavaScript that performs
 various transformations such as rotate, scale, translate, skew, add, subtract
 and multiply.</p>
-<p>It's very useful if you need to track or create transforms and need to apply
-the transforms to custom points or point arrays.</p>
+<p>It's intended for situations where you need to track or create transforms
+and want to apply it permanently to your own points.</p>
 <p>The matrix can optionally synchronize a canvas 2D context object so the transformations
 on the canvas matches pixel perfect the local transformations of the Matrix object.</p>
 <p>No dependencies.</p>
-<h2>Usage</h2><p>Include the script and create a new instance like:</p>
-<pre><code>var matrix = new Matrix([context]);
-</code></pre><p>You can supply an optional context as argument which in case will be
+<h2>Usage</h2><p>Just include the script and create a new instance like:</p>
+<pre class="prettyprint source"><code>var matrix = new Matrix([context]);</code></pre><p>You can supply an optional context as argument which in case will be
 synchronized with the transformations that are applied to the matrix
 object.</p>
 <p>You can now apply transformations:</p>
-<pre><code>matrix.rotate(angle);                    // angle in radians
+<pre class="prettyprint source"><code>matrix.rotate(angle);                    // angle in radians
 matrix.rotateDeg(angle);                   // angle in degrees
 matrix.translate(x, y);
 matrix.translateX(x);
@@ -100,39 +99,29 @@ matrix.skewX(sx);
 matrix.skewY(sy);
 matrix.transform(a, b, c, d, e, f);
 matrix.setTransform(a, b, c, d, e, f);
-matrix.reset();
-</code></pre><p>Get current transform matrix values:</p>
-<pre><code>var a = matrix.a;    // scale x
+matrix.reset();</code></pre><p>Get current transform matrix values:</p>
+<pre class="prettyprint source"><code>var a = matrix.a;    // scale x
 var b = matrix.b;    // skew y
 var c = matrix.c;    // skew x
 var d = matrix.d;    // scale y
 var e = matrix.e;    // translate x
-var f = matrix.f;    // translate y
-</code></pre><p>Apply to a point:</p>
-<pre><code>var tPoint = matrix.applyToPoint(x, y);
-</code></pre><p>Apply to an Array with point objects or point pair values:</p>
-<pre><code>var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
+var f = matrix.f;    // translate y</code></pre><p>Apply to a point:</p>
+<pre class="prettyprint source"><code>var tPoint = matrix.applyToPoint(x, y);</code></pre><p>Apply to an Array with point objects or point pair values:</p>
+<pre class="prettyprint source"><code>var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
 var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
-</code></pre><p>or apply to a canvas context (other than optionally referenced in constructor):</p>
-<pre><code>matrix.applyToContext(myContext);
-</code></pre><p>Get inverse transformation matrix (the matrix you need to apply to get back
+var tPoints = matrix.applyToTypedArray(...);</code></pre><p>or apply to a canvas context (other than optionally referenced in constructor):</p>
+<pre class="prettyprint source"><code>matrix.applyToContext(myContext);</code></pre><p>Get inverse transformation matrix (the matrix you need to apply to get back
 to a identity matrix from whatever the matrix contains):</p>
-<pre><code>var invmatrix = matrix.getInverse();
-</code></pre><p>You can interpolate between current and a new matrix. The function
+<pre class="prettyprint source"><code>var invmatrix = matrix.getInverse();</code></pre><p>You can interpolate between current and a new matrix. The function
 returns a new matrix:</p>
-<pre><code>var imatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]
-</code></pre><p>Check if there is any transforms applied:</p>
-<pre><code>var status = matrix.isIdentity();              // true if identity
-</code></pre><p>Check if two matrices are identical:</p>
-<pre><code>var status = matrix.isEqual(matrix2);          // true if equal
-</code></pre><p>Reset matrix to an identity matrix:</p>
-<pre><code>matrix.reset();
-</code></pre><p>Methods are also chainable:</p>
-<pre><code>matrix.rotateDeg(45).translate(100, 120);     // rotate, then translate
-</code></pre><p>See documentation for full overview and usage.</p>
+<pre class="prettyprint source"><code>var imatrix = matrix.interpolate(matrix2, t);  // t = [0.0, 1.0]</code></pre><p>Check if there is any transforms applied:</p>
+<pre class="prettyprint source"><code>var status = matrix.isIdentity();              // true if identity</code></pre><p>Check if two matrices are identical:</p>
+<pre class="prettyprint source"><code>var status = matrix.isEqual(matrix2);          // true if equal</code></pre><p>Reset matrix to an identity matrix:</p>
+<pre class="prettyprint source"><code>matrix.reset();</code></pre><p>Methods are also chain-able:</p>
+<pre class="prettyprint source"><code>matrix.rotateDeg(45).translate(100, 120);     // rotate, then translate</code></pre><p>See documentation for full overview and usage.</p>
 <h2>License</h2><p>Released under <a href="http://choosealicense.com/licenses/mit/">MIT license</a>. You can use this class in both commercial and non-commercial projects provided that full header (minified and developer versions) is included.</p>
 <p><em>&copy; 2014 Epistmex</em></p>
-<p><img src="http://i.imgur.com/NJpHOFr.png" alt="Epistemex"></p></article>
+<p><img src="http://i.imgur.com/YxO8CtB.png" alt="Epistemex"></p></article>
     </section>
 
 
@@ -153,7 +142,7 @@ returns a new matrix:</p>
 					<br />
 					
 		<span class="jsdoc-message">
-		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha5</a>
+		Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.3.0-alpha10</a>
 		using the <a href="https://github.com/terryweiss/docstrap">DocStrap template</a>.
 		</span>
 				</footer>

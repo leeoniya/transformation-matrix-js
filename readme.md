@@ -5,18 +5,19 @@ A affine transformation matrix (3x3) class for JavaScript that performs
 various transformations such as rotate, scale, translate, skew, add, subtract
 and multiply.
 
-It's very useful if you need to track or create transforms and need to apply
-the transforms to custom points or point arrays.
+It's intended for situations where you need to track or create transforms
+and want to apply it permanently/manually to your own points.
 
 The matrix can optionally synchronize a canvas 2D context object so the transformations
 on the canvas matches pixel perfect the local transformations of the Matrix object.
 
 No dependencies.
 
+
 Usage
 -----
 
-Include the script and create a new instance like:
+Just include the script and create a new instance like:
 
     var matrix = new Matrix([context]);
 
@@ -58,6 +59,7 @@ Apply to an Array with point objects or point pair values:
 
     var tPoints = matrix.applyToArray([{x: x1, y: y1}, {x: x2, y: y2}, ...]);
     var tPoints = matrix.applyToArray([x1, y1, x2, y2, ...]);
+    var tPoints = matrix.applyToTypedArray(...);
 
 or apply to a canvas context (other than optionally referenced in constructor):
 
@@ -85,7 +87,7 @@ Reset matrix to an identity matrix:
 
     matrix.reset();
 
-Methods are also chainable:
+Methods are also chain-able:
 
     matrix.rotateDeg(45).translate(100, 120);     // rotate, then translate
 
