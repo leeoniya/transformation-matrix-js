@@ -1,6 +1,10 @@
 Change log for 2D Transformation Matrix
 ---------------------------------------
 
+1.6
+
+ADD: new method clone()
+
 1.5
 
 ADD: new method applyToTypedArray()

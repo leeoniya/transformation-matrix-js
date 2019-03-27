@@ -87,6 +87,10 @@ Reset matrix to an identity matrix:
 
     matrix.reset();
 
+Clone the matrix
+
+    matrix.clone();
+
 Methods are also chain-able:
 
     matrix.rotateDeg(45).translate(100, 120);     // rotate, then translate
