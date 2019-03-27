@@ -369,6 +369,21 @@ Matrix.prototype = {
 	},
 
 	/**
+	 * Clones the current matrix into a new one.
+	 * @returns {Matrix} The cloned matrix
+	 */
+	clone: function() {
+		cloned = new Matrix();
+		cloned.a = this.a;
+		cloned.b = this.b;
+		cloned.c = this.c;
+		cloned.d = this.d;
+		cloned.e = this.e;
+		cloned.f = this.f;
+		return cloned;
+	},
+
+	/**
 	 * Returns true if matrix is an identity matrix (no transforms applied).
 	 * @returns {boolean} True if identity (not transformed)
 	 */
